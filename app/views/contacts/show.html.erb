@@ -4,5 +4,7 @@
 <%= form_for [@contact, Message.new] do |f| %>
   <%=f.label :body%>
   <%=f.text_field :body%>
+
+  <%=check_box_tag :foo %>
   <%=f.submit%>
 <%end%>

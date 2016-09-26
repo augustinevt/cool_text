@@ -1,23 +1,26 @@
 class MessagesController < ApplicationController
 
   def create
-
+    all_saved = true
     @user = User.find(session[:user_id])
-    @contact = Contact.find(params[:contact_id])
-    @message = @contact.messages.new(messages_params)
-    @message.to = '15759158643'
-    @message.from = '14805682488'
-
-
-
-    
-    if @message.save
-      flash[:notice] = 'message was successfully created'
-      redirect_to @message
+    params[:contacts].each do |contact|
+    @contact = Contact.find(contact)
+      @message = @contact.messages.new(messages_params)
+      @message.to = @contact.phone
+      @message.from = @user.number
+      if @message.save
+        flash[:notice] = "message was successfully sent to " + "#{@contact.name} "
+        all_saved = true
+      else
+        flash[:alert] = 'some contacts could not be reached'
+        all_saved = false
+        break
+      end
+    end
+    if all_saved
+      redirect_to root_path
     else
-      binding.pry
-      flash[:alert] = 'message was not created'
-      render :new
+      render 'new'
     end
   end
 

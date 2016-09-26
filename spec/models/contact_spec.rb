@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe Contact, type: :model do
+RSpec.describe Contact, vcr: true, type: :model do
 
 end

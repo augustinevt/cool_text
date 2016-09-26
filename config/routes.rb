@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'messages#new'
+  root 'contacts#index'
   resources :messages
 
   resources :users
