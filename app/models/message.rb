@@ -4,12 +4,17 @@ class Message < ApplicationRecord
   private
 
   def send_message
-    response = RestClient::Request.new(
+    response = []
+    begin
+      response = RestClient::Request.new(
       method: :post,
       url: 'https://api.twilio.com/2010-04-01/Accounts/AC04efbe0936700c21314bcd29d23d65d8/Messages.json',
-      user: 'AC04efbe0936700c21314bcd29d23d65d8',
-      password: 'd95621b53c4db186855751bb2d9de414',
-      payload: {Body: self.body, To: self.to, From: self.from}
+      user: ENV['TWILIO_ACCOUNT_SID'],
+      password: ENV['TWILIO_AUTH_TOKEN'],
+      payload: {body: self.body, to: self.to, from: self.from}
     ).execute
+    rescue
+      return false
+    end
   end
 end
