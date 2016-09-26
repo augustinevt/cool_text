@@ -1,12 +1,21 @@
 class MessagesController < ApplicationController
 
   def create
-    @message = Message.new(messages_params)
-    if @message.save
 
+    @user = User.find(session[:user_id])
+    @contact = Contact.find(params[:contact_id])
+    @message = @contact.messages.new(messages_params)
+    @message.to = '15759158643'
+    @message.from = '14805682488'
+
+
+
+    
+    if @message.save
       flash[:notice] = 'message was successfully created'
       redirect_to @message
     else
+      binding.pry
       flash[:alert] = 'message was not created'
       render :new
     end
@@ -23,7 +32,7 @@ class MessagesController < ApplicationController
   private
 
   def messages_params
-    params.require(:message).permit(:body, :to, :from)
+    params.require(:message).permit(:body)
   end
 
 end

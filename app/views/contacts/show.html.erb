@@ -1,2 +1,8 @@
 <h1><%= @contact.name %></h1>
 <h1><%= @contact.phone %></h1>
+
+<%= form_for [@contact, Message.new] do |f| %>
+  <%=f.label :body%>
+  <%=f.text_field :body%>
+  <%=f.submit%>
+<%end%>
