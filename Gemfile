@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'nokogiri'
 gem 'bcrypt', '~> 3.1.11'
 gem 'rest-client'
 gem 'bootstrap-sass'

@@ -9,7 +9,7 @@ class IncomingMessagesController < ApplicationController
     else
       status = 'message not sent'
     end
-    binding.pry
   end
+
 
 end
