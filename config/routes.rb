@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root 'contacts#index'
   resources :messages
 
+  resources :incoming_messages
+
   resources :users
 
   resources :contacts do

@@ -1,5 +1,6 @@
 <h1>Your Contacts</h1>
 
+<% if current_user %>
 <% current_user.contacts.each do |contact| %>
   <%= link_to contact.name, contact_path(contact)%> | <%= contact.phone %>
   <br>
@@ -7,3 +8,8 @@
 
 <%= link_to 'Add Contact', new_contact_path %>
 <%= link_to 'Send to multiple people', new_message_path %>
+
+<% else %>
+<h5>You are not signed in; please sign in to view contacts!</h5>
+
+<% end %>
